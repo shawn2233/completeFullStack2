@@ -1,0 +1,22 @@
+body{
+  padding-top:80px;
+  word-wrap:break-word;
+  background-color: lightskyblue;
+}
+img{
+  height: 200px;
+}
+span{
+  margin-right: 1%;
+  font-size: 20px;
+}
+li{
+  margin-bottom: 1%;
+}
+h3,h4,input,button{
+  font-size: 25px;
+  margin-bottom: 1%;
+}
+h4{
+  margin-bottom: 3%;
+}
