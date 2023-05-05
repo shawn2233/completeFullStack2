@@ -11,8 +11,8 @@
 <body>
 <div class="container">
     <div class="page-header text-center">
-        <h1><span class="fa-solid fa-sack-dollar"></span> Profile Page</h1>
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+        <h1><span class="fa-solid fa-sack-dollar"></span> Ready to pay?</h1>
+        <a href="/logout" class="btn btn-default btn-sm">Sign Out</a>
     </div>
 
     <div class="row">
@@ -20,16 +20,16 @@
         <!-- LOCAL INFORMATION -->
         <div class="col-sm-6">
             <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
+                <h3><span class="fa fa-user"></span> User Login</h3>
 
                 <% if (user.local.email) { %>
                     <p>
-                        <strong>id</strong>: <%= user._id %><br>
+                        
                         <strong>email</strong>: <%= user.local.email %><br>
-                        <strong>password</strong>: <%= user.local.password %>
+
                     </p>
 
-                    <a href="/unlink/local" class="btn btn-default">Unlink</a>
+                    <a href="/unlink/local" class="btn btn-default">Disconnect account</a>
                 <% } else { %>
                     <a href="/connect/local" class="btn btn-default">Connect Local</a>
                 <% } %>
@@ -39,13 +39,12 @@
         <div class="col-sm-6">
           <h3>20% Tip Calculator</h3>
           <h4>Don't be cheap, use this before you pay!</h4>
-          <ul class="messages">
-          <% for(var i=0; i<messages.length; i++) {%>
-            <li class="message">
-              <span><%= messages[i].num %></span>
-              <!-- <span><%= messages[i].msg %></span> -->
-              <span><%= messages[i].thumbUp %></span>
-              <span><i class="fa fa-thumbs-up" aria-hidden="true"></i></span>
+          <ul class="money">
+          <% for(var i=0; i<money.length; i++) {%>
+            <li class="money">
+              <span><%= money[i].num %></span>
+              <span><%= money[i].dBill %></span>
+              <span><i class="fa-regular fa-money-bill-1" aria-hidden="true"></i></span>
               <span><i class="fa fa-trash" aria-hidden="true"></i></span>
             </li>
           <% } %>
@@ -53,10 +52,10 @@
 
           <h2>Enter bill total</h2>
         <% if (user.local.email) { %>
-          <form action="/messages" method="POST">
+          <form action="/money" method="POST">
             <input type="text" passholder="num" name="num">
             <!-- <input type="text" value="test" name="msg"> -->
-            <button type="submit">Submit</button>
+            <button type="submit">Calculate</button>
           </form>
         </div>
         <% } %>

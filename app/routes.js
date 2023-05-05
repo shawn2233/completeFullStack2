@@ -9,11 +9,11 @@ module.exports = function(app, passport, db) {
   
       // PROFILE SECTION =========================
       app.get('/profile', isLoggedIn, function(req, res) {
-          db.collection('messages').find().toArray((err, result) => {
+          db.collection('money').find().toArray((err, result) => {
             if (err) return console.log(err)
             res.render('profile.ejs', {
               user : req.user,
-              messages: result
+              money: result
             })
           })
       });
@@ -28,19 +28,19 @@ module.exports = function(app, passport, db) {
   
   // message board routes ===============================================================
   
-      app.post('/messages', (req, res) => {
-        db.collection('messages').save({num:req.body.num, thumbUp:0}, (err, result) => {
+      app.post('/money', (req, res) => {
+        db.collection('money').save({num:req.body.num, dBill:req.body.dBill}, (err, result) => {
           if (err) return console.log(err)
           console.log('saved to database')
           res.redirect('/profile')
         })
       })
   
-      app.put('/messages', (req, res) => {
-        db.collection('messages')
+      app.put('/money', (req, res) => {
+        db.collection('money')
         .findOneAndUpdate({num: req.body.num}, {
           $set: {
-            thumbUp: `tip: $${(+req.body.num * .2).toFixed(2)}`
+            dBill: `tip: $${(+req.body.num * .2).toFixed(2)}`
           }
         }, {
           sort: {_id: -1},
@@ -51,8 +51,8 @@ module.exports = function(app, passport, db) {
         })
       })
   
-      app.delete('/messages', (req, res) => {
-        db.collection('messages').findOneAndDelete({num: req.body.num}, (err, result) => {
+      app.delete('/money', (req, res) => {
+        db.collection('money').findOneAndDelete({num: req.body.num}, (err, result) => {
           if (err) return res.send(500, err)
           res.send('Message deleted!')
         })
